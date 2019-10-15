@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NEW_IMAGE_NAME = "gateway"
+        NEW_IMAGE_NAME = "gateway${env.ENVIRONMENT_NAME}"
         NEW_IMAGE_TAG = "${BUILD_NUMBER}"
         NEW_IMAGE_REGISTRY_REPOSITORY    = 'docker-hosted'
     }
