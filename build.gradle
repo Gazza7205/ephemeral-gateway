@@ -20,7 +20,7 @@ buildscript {
 apply plugin: 'com.ca.apim.gateway.gateway-export-plugin'
 apply plugin: 'com.ca.apim.gateway.gateway-developer-plugin'
 
-group '<my.group.id>'
+group 'apim'
 version = '1.0.0'
 
 GatewayConnection {
@@ -28,7 +28,7 @@ GatewayConnection {
 }
 
 GatewayExportConfig {
-    folderPath = '/<project-folder>'
+    folderPath = '/prague'
 }
 
 repositories {

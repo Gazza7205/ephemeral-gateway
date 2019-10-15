@@ -1,0 +1,33 @@
+<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2002/12/policy" xmlns:L7p="http://www.layer7tech.com/ws/policy">
+    <wsp:All wsp:Usage="Required">
+        <L7p:SetVariable>
+            <L7p:Expression><![CDATA[false]]></L7p:Expression>
+            <L7p:VariableToSet stringValue="exceeded"/>
+        </L7p:SetVariable>
+        <wsp:OneOrMore wsp:Usage="Required">
+            <L7p:ThroughputQuota>
+                <L7p:CounterName stringValue="PRESET(ff936402c96390f9)"/>
+                <L7p:CounterStrategy intValue="1"/>
+                <L7p:Global booleanValue="true"/>
+                <L7p:Synchronous booleanValue="false"/>
+                <L7p:TimeUnit stringValue="hour"/>
+                <L7p:VariablePrefix stringValue="counter"/>
+            </L7p:ThroughputQuota>
+            <wsp:All wsp:Usage="Required">
+                <L7p:SetVariable>
+                    <L7p:Expression><![CDATA[true]]></L7p:Expression>
+                    <L7p:VariableToSet stringValue="exceeded"/>
+                </L7p:SetVariable>
+                <L7p:TrueAssertion/>
+            </wsp:All>
+        </wsp:OneOrMore>
+        <L7p:HardcodedResponse>
+            <L7p:ResponseBody><![CDATA[{
+  "environment": "${gateway.ENV.environment}",
+  "message": "counter value is ${counter.value}",
+  "exceeded": ${exceeded}
+}]]></L7p:ResponseBody>
+            <L7p:ResponseContentType stringValue="application/json; charset=UTF-8"/>
+        </L7p:HardcodedResponse>
+    </wsp:All>
+</wsp:Policy>

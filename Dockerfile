@@ -1,5 +1,14 @@
 FROM caapim/gateway:latest
-## Copying the deployment package
-COPY build/gateway/<project-name>-<version>.gw7 /opt/docker/rc.d/deployment.gw7
-## Make restman available
+
+USER root
+RUN ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
+RUN localedef -c -i en_US -f UTF-8 en_US.UTF-8 --quiet
+ENV LANG="en_US.UTF-8"
+ENV LANGUAGE="en_US:en"
+ENV ENV.PROPERTY.gateway.otk.port="443"
+ENV ENV.CONTEXT_VARIABLE_PROPERTY.\#OTK\ Storage\ Configuration.dbsystem="cassandra"
+
+COPY build/gateway/prague-1.0.0.gw7 /opt/docker/rc.d/deployment.gw7
+
 RUN touch /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
+USER ${ENTRYPOINT_UID}

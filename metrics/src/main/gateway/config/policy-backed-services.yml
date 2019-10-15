@@ -1,5 +1,5 @@
-metrics:
+ephemeral-gateway-test-pipelinemetrics:
   interfaceName: "com.l7tech.external.assertions.pbsmel.server.ServiceMetricsProcessor"
   operations:
-  - policy: "example/influxdb"
+  - policy: "metrics/influxdb"
     operationName: "process"
