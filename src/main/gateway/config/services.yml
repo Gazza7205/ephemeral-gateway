@@ -1,13 +1,13 @@
-prague/External API Call:
+prague/ExternalAPICall:
   url: "/api/v1/norris"
-  policy: "prague/External API Call"
+  policy: "prague/ExternalAPICall"
   httpMethods:
   - "GET"
   properties: {}
   wssProcessingEnabled: false
-prague/Prague counter API:
+prague/PragueCounterAPI:
   url: "/api/v1/counter"
-  policy: "prague/Prague counter API"
+  policy: "prague/PragueCounterAPI"
   httpMethods:
   - "DELETE"
   - "POST"

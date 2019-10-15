@@ -25,7 +25,8 @@
             <L7p:ResponseBody><![CDATA[{
   "environment": "${gateway.ENV.environment}",
   "message": "counter value is ${counter.value}",
-  "exceeded": ${exceeded}
+  "exceeded": ${exceeded},
+  "nodeId": "${ssgnode.id}"
 }]]></L7p:ResponseBody>
             <L7p:ResponseContentType stringValue="application/json; charset=UTF-8"/>
         </L7p:HardcodedResponse>

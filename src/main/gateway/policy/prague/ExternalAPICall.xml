@@ -4,6 +4,11 @@
             <L7p:Expression><![CDATA[${gateway.ENV.environment}]]></L7p:Expression>
             <L7p:VariableToSet stringValue="environment"/>
         </L7p:SetVariable>
+        <L7p:AddHeader>
+            <L7p:HeaderName stringValue="Accept-Encoding"/>
+            <L7p:HeaderValue stringValue="gzip, deflate"/>
+            <L7p:RemoveExisting booleanValue="true"/>
+        </L7p:AddHeader>
         <L7p:HttpRoutingAssertion>
             <L7p:ProtectedServiceUrl stringValue="https://api.chucknorris.io/jokes/random"/>
             <L7p:RequestHeaderRules httpPassthroughRuleSet="included">
