@@ -15,3 +15,13 @@ prague/PragueCounterAPI:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+prague/Test:
+  url: "/api/v1/test"
+  policy: "prague/Test"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
