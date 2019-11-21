@@ -19,7 +19,7 @@ pipeline {
                 sh """./gradlew -DimageName=${env.NEW_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
             }
         }
-	   stage('Login Docker, Tag and push docker image to Nexus') {
+	   stage('Login Docker, Tag and push docker image to Docker Registry') {
             steps {
 		        sh """docker login ${env.NEW_IMAGE_REGISTRY_HOSTNAME} -u ${params.NEW_IMAGE_REGISTRY_USER} --password ${params.NEW_IMAGE_REGISTRY_PASSWORD}
                      docker tag ${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG} ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
