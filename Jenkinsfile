@@ -32,7 +32,7 @@ pipeline {
         stage('Force sync flux sync') {
             steps {
                 sh """cd /home/jenkins
-                      fluxctl identity --k8s-fwd-ns flux"""
+                      /snap/fluxctl/current/bin/fluxctl.real identity --k8s-fwd-ns flux"""
             }
         }
     }
