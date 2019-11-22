@@ -2,10 +2,11 @@ pipeline {
     agent any
 
     environment {
-        NEW_IMAGE_ENVIRONMENT = "test"
+        ENVIRONMENT_NAME = "${env.ENVIRONMENT_NAME}"
         NEW_IMAGE_NAME = "gateway"
         NEW_IMAGE_TAG = "${BUILD_NUMBER}"
         CURRENT_IMAGE_NAME = "${NEW_IMAGE_NAME}-${NEW_IMAGE_ENVIRONMENT}"
+        BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}" 
     }
 
     stages {
@@ -18,22 +19,28 @@ pipeline {
         }
         stage('Build Image with Docker') {
             steps {
-                sh """./gradlew -DimageName=${env.NEW_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
+                sh """./gradlew -DimageName=${env.CURRENT_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
             }
         }
 	   stage('Login Docker, Tag and push docker image to Docker Registry') {
             steps {
 		        sh """docker login ${env.NEW_IMAGE_REGISTRY_HOSTNAME} -u ${params.NEW_IMAGE_REGISTRY_USER} --password ${params.NEW_IMAGE_REGISTRY_PASSWORD}
-                     docker tag ${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG} ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
-			         docker push ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
-			         docker inspect ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.NEW_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
+                     docker tag ${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG} ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
+			         docker push ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
+			         docker inspect ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
             }
         }
-        stage('Force sync flux sync') {
+        stage('Blaze CT Functional Test') {
             steps {
-                sh """cd /home/jenkins
-                      /snap/fluxctl/current/bin/fluxctl.real identity --k8s-fwd-ns flux"""
+                def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
+                def getRC = get.getResponseCode();
+                println(getRC);
+                println(get.getInputStream().getText())
+                if(getRC.equals(200)) {
+                println(get.getInputStream().getText());
+                }
             }
         }
+
     }
 }
