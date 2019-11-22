@@ -47,7 +47,7 @@ pipeline {
 
                      //wait for results
                      println("Waiting for results")
-                     wait()
+                     wait
                      testRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
                      println(testRes);
                  }
