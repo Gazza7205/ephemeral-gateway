@@ -6,7 +6,7 @@ pipeline {
         ENVIRONMENT_NAME = "${env.ENVIRONMENT_NAME}"
         NEW_IMAGE_NAME = "gateway"
         NEW_IMAGE_TAG = "${BUILD_NUMBER}"
-        CURRENT_IMAGE_NAME = "${NEW_IMAGE_NAME}-${NEW_IMAGE_ENVIRONMENT}"
+        CURRENT_IMAGE_NAME = "${NEW_IMAGE_NAME}-${ENVIRONMENT_NAME}"
         BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}"
         BLAZE_CT_AUTH_TOKEN = "${env.BLAZE_CT_AUTH_TOKEN}"
         rsResultAPI = ""
