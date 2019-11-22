@@ -31,15 +31,17 @@ pipeline {
             }
         }
         stage('Blaze CT Functional Test') {
-           // steps {
-                 get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
-                 getRC = get.getResponseCode();
+            environment {
+                 def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
+                 def getRC = get.getResponseCode();
+            }
+            steps {    
                 println(getRC);
                 println(get.getInputStream().getText())
                 if(getRC.equals(200)) {
                 println(get.getInputStream().getText());
                 }
-         //   }
+            }
         }
 
     }
