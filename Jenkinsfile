@@ -31,9 +31,13 @@ pipeline {
     //         }
     //     }
         stage('Blaze CT Functional Test') {
+            environment{
+                def jsonSlurper = new JsonSlurper()
+            }
             steps {
                  script {
-                     println(restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}"))
+                     res = restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
+                     jsonObj = jsonSlurper(res);
                     // if(getRC == '201') {
                     //    println("success status: " + getRC);
                     //    println(getText);
