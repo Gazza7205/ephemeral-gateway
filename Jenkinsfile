@@ -40,7 +40,7 @@ pipeline {
                  script {
                     if(getRC == '201') {
                        println("success status: " + getRC);
-                       println(getText;
+                       println(getText);
                     }else{
                        println("failed status: " + getRC)
                        println(getText);
@@ -50,4 +50,5 @@ pipeline {
             }
         }
 
+    }
     }
