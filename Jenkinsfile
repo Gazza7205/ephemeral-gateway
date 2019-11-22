@@ -35,7 +35,10 @@ pipeline {
         }
 
        stage('Wait for WeaveFlux to apply the update.'){
-           sleep 180
+           steps{
+               sleep 180
+           }
+           
        }
         stage('Blaze CT Functional Test') {
             steps {
