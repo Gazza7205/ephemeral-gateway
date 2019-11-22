@@ -34,7 +34,7 @@ pipeline {
             environment {
                  def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
                  def getRC = get.getResponseCode();
-                 def getText = get.getText();
+                 def getText = get.getContent();
              }
             steps {
                  script {
