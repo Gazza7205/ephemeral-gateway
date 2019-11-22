@@ -55,10 +55,17 @@ pipeline {
             }
 
         }
-    stage('Check resulys'){
+    stage('Validate results'){
             steps {
                script{
-                     rsRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
+                     def jsonSlurper = new JsonSlurperClassic();
+                     res = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
+                     rsRes = jsonSlurper.parseText(res)
+                     if(rsRes.data.assertions_defined == rsRes.data.assertions_passed){
+                         println("functional tests have passed!")
+                     }else{
+                         println("functional tests have failed! Rolling back to last successful release..")
+                     }
                      println(rsRes);
                }
             }
