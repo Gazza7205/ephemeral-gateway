@@ -32,8 +32,8 @@ pipeline {
         }
         stage('Blaze CT Functional Test') {
             steps {
-                def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
-                def getRC = get.getResponseCode();
+                get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
+                getRC = get.getResponseCode();
                 println(getRC);
                 println(get.getInputStream().getText())
                 if(getRC.equals(200)) {
