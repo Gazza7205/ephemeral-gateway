@@ -44,11 +44,11 @@ pipeline {
                      rsRes = jsonSlurper.parseText(res)
                      rsResultAPI = rsRes.data.runs[0].api_test_run_url // [0]["api_test_run_url"];
                      println(rsResultAPI)
-
+                     rsRes = null;
                      //wait for results
                      println("Waiting for results")
                      blockThread();
-                     testRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
+                     rsRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
                      println(testRes);
                  }
                  
