@@ -34,15 +34,16 @@ pipeline {
             environment {
                  def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
                  def getRC = get.getResponseCode();
+                 def getText = get.getText();
              }
             steps {
                  script {
                     if(getRC == '201') {
                        println("success status: " + getRC);
-                       println(get.getText());
+                       println(getText);
                     }else{
                        println("failed status: " + getRC)
-                       println(get.getText())
+                       println(getText);
                     }
                  }
                 
