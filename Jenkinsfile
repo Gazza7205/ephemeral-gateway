@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Build Image with Docker') {
             steps {
-                sh """./gradlew -DimageName=${env.CURRENT_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} -DbuildArgs=([build_number,${BUILD_NUMBER}]) > buildDockerImage"""
+                sh """./gradlew -DimageName=${env.CURRENT_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} -DbuildArgs=[build_number,${BUILD_NUMBER}] > buildDockerImage"""
                 //sh """docker build --build-arg build_number=${BUILD_NUMBER} ."""
             }
         }
