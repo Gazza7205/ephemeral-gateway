@@ -37,7 +37,7 @@ pipeline {
     }
             steps {
                  script {
-                    if(getRC.equals(200)) {
+                    if(getRC.equals(201)) {
                        println("success status: " + getRC);
                        println(get.getInputStream().getText());
                     }else{
