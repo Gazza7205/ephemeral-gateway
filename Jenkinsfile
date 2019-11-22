@@ -45,6 +45,7 @@ pipeline {
                        println("failed status: " + getRC)
                        println(getText);
                     }
+                    get = null;
                  }
             }
             }
