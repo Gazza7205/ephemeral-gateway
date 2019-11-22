@@ -11,6 +11,8 @@ ENV ENV.PROPERTY.jenkins_build_number=$build_number
 
 
 #Copy the file that we build during gradle build
+RUN ls
+RUN pwd
 COPY build/gateway/prague-1.0.0.gw7 /opt/docker/rc.d/deployment.gw7
 
 RUN touch /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
