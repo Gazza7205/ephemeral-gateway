@@ -68,7 +68,7 @@ pipeline {
                          println("functional tests have passed!");
                          println(rsRes)
                      }else{
-                         println("functional tests have failed! Rolling back to last successful release..")
+                         error("functional tests have failed! Rolling back to last successful release..")
                      }
                      //println(rsRes);
                }
