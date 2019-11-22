@@ -33,9 +33,6 @@ pipeline {
     //         }
     //     }
         stage('Blaze CT Functional Test') {
-            // environment{
-                
-            // }
             steps {
                  script {
                      def jsonSlurper = new JsonSlurper()
