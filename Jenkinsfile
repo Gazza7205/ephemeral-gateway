@@ -33,7 +33,7 @@ pipeline {
         stage('Blaze CT Functional Test') {
             steps {
                  script {
-                     restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
+                     println(restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}"))
                     // if(getRC == '201') {
                     //    println("success status: " + getRC);
                     //    println(getText);
@@ -68,4 +68,5 @@ def restCall(String method, String authToken) {
 
     String text = connection.content.text
     connection = null
+    return text
 }
