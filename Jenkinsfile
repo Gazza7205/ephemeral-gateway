@@ -1,6 +1,6 @@
+
 pipeline {
     agent any
-
     environment {
         ENVIRONMENT_NAME = "${env.ENVIRONMENT_NAME}"
         NEW_IMAGE_NAME = "gateway"
@@ -39,10 +39,10 @@ pipeline {
                  script {
                     if(getRC == '201') {
                        println("success status: " + getRC);
-                       println(get);
+                       println(get.getText());
                     }else{
                        println("failed status: " + getRC)
-                       println(get.getInputStream().getText())
+                       println(get.getText())
                     }
                  }
                 
