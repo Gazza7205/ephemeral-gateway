@@ -32,6 +32,7 @@ pipeline {
     //     }
         stage('Blaze CT Functional Test') {
             environment{
+                import groovy.json.JsonSlurper
                 def jsonSlurper = new JsonSlurper()
             }
             steps {
@@ -53,7 +54,7 @@ pipeline {
 
     }
 
-import groovy.json.JsonSlurper
+
 def restCall(String method, String authToken) {
     def URL url = new URL("${env.BLAZE_CT_TEST_HOOK}")
     def HttpURLConnection connection = url.openConnection()
