@@ -41,7 +41,7 @@ pipeline {
                        println("success status: " + getRC);
                        println(get.getInputStream().getText());
                     }else{
-                       println("failed status: " + println("status: " + getRC))
+                       println("failed status: " + getRC)
                        println(get.getInputStream().getText())
                     }
                  }
