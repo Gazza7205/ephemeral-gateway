@@ -22,8 +22,8 @@ pipeline {
         }
         stage('Build Image with Docker') {
             steps {
-                //sh """./gradlew -DimageName=${env.CURRENT_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} buildDockerImage"""
-                sh """docker build --build-arg build_number=${BUILD_NUMBER} ."""
+                sh """./gradlew -DimageName=${env.CURRENT_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} -DbuildArgs=build_number=${BUILD_NUMBER} buildDockerImage"""
+               // sh """docker build --build-arg build_number=${BUILD_NUMBER} ."""
             }
         }
 	   stage('Login Docker, Tag and push docker image to Docker Registry') {
