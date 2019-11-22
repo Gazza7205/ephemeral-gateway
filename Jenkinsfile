@@ -1,3 +1,28 @@
+node {
+
+    def restCall(String method, String authToken) {
+    def URL url = new URL("${env.BLAZE_CT_TEST_HOOK}")
+    def HttpURLConnection connection = url.openConnection()
+
+    connection.setRequestProperty("Authorization", "Bearer " + authToken);
+    connection.setRequestMethod(method)
+    connection.doOutput = true
+
+    connection.connect();
+
+    def statusCode =  connection.responseCode
+    if (statusCode != 200 && statusCode != 201) {
+        String text = connection.getErrorStream().text
+        connection = null
+        throw new Exception(text)
+    }
+
+    String text = connection.content.text
+    connection = null
+}
+}
+
+
 
 pipeline {
     agent any
@@ -38,27 +63,7 @@ pipeline {
              //    def getText = get.getContent();
 
                
-                def restCall(String method, String authToken) {
-    def URL url = new URL("${env.BLAZE_CT_TEST_HOOK}")
-    def HttpURLConnection connection = url.openConnection()
-
-    connection.setRequestProperty("Authorization", "Bearer " + authToken);
-    connection.setRequestMethod(method)
-    connection.doOutput = true
-
-    connection.connect();
-
-    def statusCode =  connection.responseCode
-    if (statusCode != 200 && statusCode != 201) {
-        String text = connection.getErrorStream().text
-        connection = null
-        throw new Exception(text)
-    }
-
-    String text = connection.content.text
-    connection = null
-}
-
+         
 
              }
             steps {
