@@ -35,12 +35,12 @@ pipeline {
                  def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
                  def getRC = get.getResponseCode();
             }
-            steps {    
+            steps {
+                when { not: { getRC 200 } }
+                println("Test Failed.. roll back");
                 println(getRC);
-                println(get.getInputStream().getText())
-                if(getRC.equals(200)) {
+                when { getRC 200 }
                 println(get.getInputStream().getText());
-                }
             }
         }
 
