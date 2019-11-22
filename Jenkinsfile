@@ -1,4 +1,4 @@
-import groovy.json.JsonSlurper
+import groovy.json.JsonSlurperClassic
 
 pipeline {
     agent any
@@ -35,7 +35,7 @@ pipeline {
         stage('Blaze CT Functional Test') {
             steps {
                  script {
-                     def jsonSlurper = new JsonSlurper()
+                     def jsonSlurper = new JsonSlurperClassic()
                      res = restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
                      rsRes = jsonSlurper.parseText(res);
                      rsResultAPI = rsRes.runs[0].api_test_run_url;
