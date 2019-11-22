@@ -40,16 +40,9 @@ pipeline {
                  script {
                      def jsonSlurper = new JsonSlurper()
                      res = restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
-                     jsonObj = jsonSlurper.parseText(res);
-                     println(jsonObj)
-                    // if(getRC == '201') {
-                    //    println("success status: " + getRC);
-                    //    println(getText);
-                    // }else{
-                    //    println("failed status: " + getRC)
-                    //    println(getText);
-                    // }
-                    // get = null;
+                     rsRes = jsonSlurper.parseText(res);
+                     rsResultAPI = rsRes.runs[0].api_test_run_url;
+                     println(rsResultAPI)
                  }
             }
             }
