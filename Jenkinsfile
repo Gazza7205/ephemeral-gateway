@@ -38,7 +38,7 @@ pipeline {
                      def jsonSlurper = new JsonSlurperClassic()
                      res = restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
                      rsRes = jsonSlurper.parseText(res);
-                     rsResultAPI = rsRes.runs[0].api_test_run_url;
+                     rsResultAPI = rsRes[runs][0].api_test_run_url;
                      println(rsResultAPI)
                  }
             }
