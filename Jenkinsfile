@@ -36,7 +36,7 @@ pipeline {
                  def getRC = get.getResponseCode();
             }
             steps {
-                when { not: { getRC 200 } }
+                when { not { getRC 200 } }
                 println("Test Failed.. roll back");
                 println(getRC);
                 when { getRC 200 }
