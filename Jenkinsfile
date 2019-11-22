@@ -9,6 +9,7 @@ pipeline {
         CURRENT_IMAGE_NAME = "${NEW_IMAGE_NAME}-${NEW_IMAGE_ENVIRONMENT}"
         BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}&token=237b6558-e262-4fab-b457-21189f607a5c"
         BLAZE_CT_AUTH_TOKEN = "e7ee3b4f-e07f-4d47-9189-b841cef7a483"
+        rsResultAPI = ""
     }
 
      stages {
@@ -39,21 +40,31 @@ pipeline {
         stage('Blaze CT Functional Test') {
             steps {
                  script {
-                     def jsonSlurper = new JsonSlurperClassic()
+                     def jsonSlurper = new JsonSlurperClassic();
                      res = restCall("GET", "${env.BLAZE_CT_TEST_HOOK}", "")
                      rsRes = jsonSlurper.parseText(res)
                      rsResultAPI = rsRes.data.runs[0].api_test_run_url // [0]["api_test_run_url"];
                      println(rsResultAPI)
-                     rsRes = null;
-                     //wait for results
-                     println("Waiting for results")
-                     blockThread();
-                     rsRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
-                     println(testRes);
                  }
                  
             }
             }
+        stage('Wait for release to be applied'){
+            steps {
+               sleep(30)
+            }
+
+        }
+    stage('Check resulys'){
+            steps {
+               script{
+                     rsRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
+                     println(rsRes);
+               }
+            }
+
+        }
+
         }
 
     }
