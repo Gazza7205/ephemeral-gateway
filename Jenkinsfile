@@ -47,7 +47,7 @@ pipeline {
 
                      //wait for results
                      println("Waiting for results")
-                     wait
+                     blockThread();
                      testRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
                      println(testRes);
                  }
@@ -58,10 +58,11 @@ pipeline {
 
     }
 
-def wait() {
+def blockThread() {
     println("Waiting for results...")
     sleep(30)
     println("Finished waiting...")
+    return "Finished";
 }
 
 def restCall(String method, String Url, String authToken) {
