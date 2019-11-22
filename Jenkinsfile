@@ -6,7 +6,7 @@ pipeline {
         NEW_IMAGE_NAME = "gateway"
         NEW_IMAGE_TAG = "${BUILD_NUMBER}"
         CURRENT_IMAGE_NAME = "${NEW_IMAGE_NAME}-${NEW_IMAGE_ENVIRONMENT}"
-        BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}" 
+        BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}&token=237b6558-e262-4fab-b457-21189f607a5c" 
     }
 
      stages {
