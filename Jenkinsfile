@@ -32,14 +32,24 @@ pipeline {
 	// 		         docker inspect ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
     //         }
     //     }
+
+    //    stage('Wait for WeaveFlux to apply the update.'){
+    //        sleep 180
+    //    }
         stage('Blaze CT Functional Test') {
             steps {
                  script {
                      def jsonSlurper = new JsonSlurperClassic()
-                     res = restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
+                     res = restCall("GET", "${env.BLAZE_CT_TEST_HOOK}", "")
                      rsRes = jsonSlurper.parseText(res)
-                     rsResultAPI = rsRes.data.runs[0].api_test_run_url// [0]["api_test_run_url"];
+                     rsResultAPI = rsRes.data.runs[0].api_test_run_url // [0]["api_test_run_url"];
                      println(rsResultAPI)
+
+                     //wait for results
+                     println("Waiting for results")
+                     sleep 30
+                     res = ("GET", rsResultAPI, "${env.BLAZE_CT_AUTH_TOKEN}");
+                     println(res);
                  }
             }
             }
@@ -48,11 +58,13 @@ pipeline {
     }
 
 
-def restCall(String method, String authToken) {
-    def URL url = new URL("${env.BLAZE_CT_TEST_HOOK}")
+def restCall(String method, String Url, String authToken) {
+    def URL url = new URL(Url)
     def HttpURLConnection connection = url.openConnection()
-
-    connection.setRequestProperty("Authorization", "Bearer " + authToken);
+    if(authToken != ""){
+       connection.setRequestProperty("Authorization", "Bearer " + authToken);
+    }
+    
     connection.setRequestMethod(method)
     connection.doOutput = true
 
