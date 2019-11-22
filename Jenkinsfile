@@ -52,7 +52,7 @@ pipeline {
                  
             }
             }
-        stage('Wait for release to be applied'){
+        stage('Wait for functional test to complete'){
             steps {
                sleep(30)
             }
@@ -65,7 +65,8 @@ pipeline {
                      res = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
                      rsRes = jsonSlurper.parseText(res)
                      if(rsRes.data.assertions_defined == rsRes.data.assertions_passed){
-                         println("functional tests have passed!")
+                         println("functional tests have passed!");
+                         println(rsRes)
                      }else{
                          println("functional tests have failed! Rolling back to last successful release..")
                      }
