@@ -47,7 +47,7 @@ pipeline {
 
                      //wait for results
                      println("Waiting for results")
-                     sleep(30)
+                     wait()
                      testRes = restCall("GET", "${rsResultAPI}", "${env.BLAZE_CT_AUTH_TOKEN}");
                      println(testRes);
                  }
@@ -58,6 +58,11 @@ pipeline {
 
     }
 
+def wait() {
+    println("Waiting for results...")
+    sleep(30)
+    println("Finished waiting...")
+}
 
 def restCall(String method, String Url, String authToken) {
     def URL url = new URL(Url)
