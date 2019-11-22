@@ -6,7 +6,8 @@ pipeline {
         NEW_IMAGE_NAME = "gateway"
         NEW_IMAGE_TAG = "${BUILD_NUMBER}"
         CURRENT_IMAGE_NAME = "${NEW_IMAGE_NAME}-${NEW_IMAGE_ENVIRONMENT}"
-        BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}&token=237b6558-e262-4fab-b457-21189f607a5c" 
+        BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}&token=237b6558-e262-4fab-b457-21189f607a5c"
+        BLAZE_CT_AUTH_TOKEN = "e7ee3b4f-e07f-4d47-9189-b841cef7a483"
     }
 
      stages {
@@ -32,20 +33,45 @@ pipeline {
     //     }
         stage('Blaze CT Functional Test') {
             environment {
-                 def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
-                 def getRC = get.getResponseCode();
-                 def getText = get.getContent();
+               //  def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
+              //   def getRC = get.getResponseCode();
+             //    def getText = get.getContent();
+
+                @NonCPS
+                def restCall(String method, String authToken) {
+    def URL url = new URL("${env.BLAZE_CT_TEST_HOOK}")
+    def HttpURLConnection connection = url.openConnection()
+
+    connection.setRequestProperty("Authorization", "Bearer " + authToken);
+    connection.setRequestMethod(method)
+    connection.doOutput = true
+
+    connection.connect();
+
+    def statusCode =  connection.responseCode
+    if (statusCode != 200 && statusCode != 201) {
+        String text = connection.getErrorStream().text
+        connection = null
+        throw new Exception(text)
+    }
+
+    String text = connection.content.text
+    connection = null
+}
+
+
              }
             steps {
                  script {
-                    if(getRC == '201') {
-                       println("success status: " + getRC);
-                       println(getText);
-                    }else{
-                       println("failed status: " + getRC)
-                       println(getText);
-                    }
-                    get = null;
+                     restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
+                    // if(getRC == '201') {
+                    //    println("success status: " + getRC);
+                    //    println(getText);
+                    // }else{
+                    //    println("failed status: " + getRC)
+                    //    println(getText);
+                    // }
+                    // get = null;
                  }
             }
             }
