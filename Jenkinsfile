@@ -37,7 +37,7 @@ pipeline {
               //   def getRC = get.getResponseCode();
              //    def getText = get.getContent();
 
-                @NonCPS
+               
                 def restCall(String method, String authToken) {
     def URL url = new URL("${env.BLAZE_CT_TEST_HOOK}")
     def HttpURLConnection connection = url.openConnection()
