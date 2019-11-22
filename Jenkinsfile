@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 pipeline {
     agent any
     environment {
@@ -32,7 +34,7 @@ pipeline {
     //     }
         stage('Blaze CT Functional Test') {
             environment{
-                import groovy.json.JsonSlurper
+                
                 def jsonSlurper = new JsonSlurper()
             }
             steps {
