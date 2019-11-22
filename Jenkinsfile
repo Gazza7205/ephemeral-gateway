@@ -9,7 +9,7 @@ pipeline {
         BLAZE_CT_TEST_HOOK = "${env.BLAZE_CT_TEST_HOOK}" 
     }
 
-    // stages {
+     stages {
     //     stage('Gradle Preparation & Build') {
     //         steps {
     //             sh '''./gradlew clean
@@ -34,7 +34,7 @@ pipeline {
             environment {
                  def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
                  def getRC = get.getResponseCode();
-    }
+             }
             steps {
                  script {
                     if(getRC == 201) {
@@ -52,4 +52,4 @@ pipeline {
         }
 
     }
-//}
+}
