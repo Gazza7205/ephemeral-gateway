@@ -33,12 +33,12 @@ pipeline {
     //         }
     //     }
         stage('Blaze CT Functional Test') {
-            environment{
+            // environment{
                 
-                def jsonSlurper = new JsonSlurper()
-            }
+            // }
             steps {
                  script {
+                     def jsonSlurper = new JsonSlurper()
                      res = restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
                      jsonObj = jsonSlurper(res);
                     // if(getRC == '201') {
