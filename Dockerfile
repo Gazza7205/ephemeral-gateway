@@ -1,12 +1,13 @@
 FROM caapim/gateway:latest
 
 USER root
+ARG build_number
 RUN ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 RUN localedef -c -i en_US -f UTF-8 en_US.UTF-8 --quiet
 ENV LANG="en_US.UTF-8"
 ENV LANGUAGE="en_US:en"
 ENV ENV.PROPERTY.gateway.otk.port="443"
-ENV ENV.CONTEXT_VARIABLE_PROPERTY.\#OTK\ Storage\ Configuration.dbsystem="cassandra"
+ENV ENV.PROPERTY.jenkins_build_number=$build_number
 
 
 #Copy the file that we build during gradle build

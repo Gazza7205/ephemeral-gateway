@@ -1,13 +1,6 @@
-prague/ExternalAPICall:
-  url: "/api/v1/norris"
-  policy: "prague/ExternalAPICall"
-  httpMethods:
-  - "GET"
-  properties: {}
-  wssProcessingEnabled: false
-prague/PragueCounterAPI:
-  url: "/api/v1/counter"
-  policy: "prague/PragueCounterAPI"
+usergroup/Test:
+  url: "/api/v1/test"
+  policy: "usergroup/Test"
   httpMethods:
   - "DELETE"
   - "POST"
@@ -15,9 +8,26 @@ prague/PragueCounterAPI:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
-prague/Test:
-  url: "/api/v1/test"
-  policy: "prague/Test"
+usergroup/PragueCounterAPI:
+  url: "/api/v1/counter"
+  policy: "usergroup/PragueCounterAPI"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+usergroup/ExternalAPICall:
+  url: "/api/v1/norris"
+  policy: "usergroup/ExternalAPICall"
+  httpMethods:
+  - "GET"
+  properties: {}
+  wssProcessingEnabled: false
+usergroup/Jenkins Build Number:
+  url: "/api/v1/jenkins/buildinfo"
+  policy: "usergroup/Jenkins Build Number"
   httpMethods:
   - "DELETE"
   - "POST"

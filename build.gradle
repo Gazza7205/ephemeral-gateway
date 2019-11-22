@@ -28,7 +28,7 @@ GatewayConnection {
 }
 
 GatewayExportConfig {
-    folderPath = '/prague'
+    folderPath = '/usergroup'
 }
 
 repositories {
