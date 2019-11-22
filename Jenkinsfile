@@ -31,15 +31,6 @@ pipeline {
     //         }
     //     }
         stage('Blaze CT Functional Test') {
-            environment {
-               //  def get = new URL("${env.BLAZE_CT_TEST_HOOK}").openConnection();
-              //   def getRC = get.getResponseCode();
-             //    def getText = get.getContent();
-
-               
-         
-
-             }
             steps {
                  script {
                      restCall("GET", "${env.BLAZE_CT_AUTH_TOKEN}")
