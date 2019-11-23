@@ -2,7 +2,7 @@
     <wsp:All wsp:Usage="Required">
         <L7p:SslAssertion/>
         <L7p:HardcodedResponse>
-            <L7p:ResponseBody><![CDATA[${gateway.ENV.buildnumber}]]></L7p:ResponseBody>
+            <L7p:ResponseBody><![CDATA[buildNumber:${gateway.ENV.buildnumber}]]></L7p:ResponseBody>
             <L7p:ResponseContentType stringValue="text/plain; charset=UTF-8"/>
         </L7p:HardcodedResponse>
     </wsp:All>
