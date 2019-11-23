@@ -7,7 +7,7 @@ RUN localedef -c -i en_US -f UTF-8 en_US.UTF-8 --quiet
 ENV LANG="en_US.UTF-8"
 ENV LANGUAGE="en_US:en"
 ENV ENV.PROPERTY.gateway.otk.port="443"
-ENV ENV.PROPERTY.jenkins_build_number=$BUILD_NUMBER
+ENV ENV.PROPERTY.gateway.ENV.buildnumber=$BUILD_NUMBER
 
 
 #Copy the file that we build during gradle build

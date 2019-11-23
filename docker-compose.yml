@@ -24,7 +24,7 @@ services:
       ENV.CONTEXT_VARIABLE_PROPERTY.influxdb.tags: "env=dev"
       #ENV.CONTEXT_VARIABLE_PROPERTY.#OTK Storage Configuration.dbsystem: "cassandra"
       ENV.PROPERTY.gateway.ENV.environment: "test"
-      ENV.PROPERTY.gateway.ENV.jenkins_build_number: 1
+      ENV.PROPERTY.gateway.ENV.buildnumber: 1
 secrets:
   license:
     file: ./docker/license.xml
