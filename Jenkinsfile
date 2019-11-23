@@ -67,7 +67,13 @@ pipeline {
                      rsRes = jsonSlurper.parseText(res)
                      if(rsRes.data.assertions_defined == rsRes.data.assertions_passed){
                          println("functional tests have passed!");
-                         println(rsRes)
+                         println("Confirming tests run against correct version");
+                         //validate test run against this build...
+                         if(rsRes.data.requests[2].assertions[1].actual_value == "${BUILD_NUMBER}"){
+                            println("Test executed against old version... probably retrigger... doing nothing for now");
+                            println("Actual Build: " + rsRes.data.requests[2].assertions[1].actual_value + "Expected: " + "${BUILD_NUMBER}")
+                         }
+                         
                          //ready to continue...
                      }else{
                          //There was error - drop the image and fail the pipeline.. this should cause Weave to revert to
