@@ -68,7 +68,11 @@ pipeline {
                      if(rsRes.data.assertions_defined == rsRes.data.assertions_passed){
                          println("functional tests have passed!");
                          println(rsRes)
+                         //ready to continue...
                      }else{
+                         //There was error - drop the image and fail the pipeline.. this should cause Weave to revert to
+                         //last successful build
+                         sh """docker rmi ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
                          error("functional tests have failed! Rolling back to last successful release..")
                      }
                      //println(rsRes);
