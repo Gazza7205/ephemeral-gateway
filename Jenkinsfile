@@ -22,7 +22,6 @@ pipeline {
         }
         stage('Build Image with Docker') {
             steps {
-                //sh """./gradlew -DimageName=${env.CURRENT_IMAGE_NAME} -DimageTag=${env.NEW_IMAGE_TAG} -DbuildArgs=mapOf(build_number to ${BUILD_NUMBER}) > buildDockerImage"""
                 sh """docker build -t ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}  --build-arg BUILD_NUMBER="${NEW_IMAGE_TAG}" ."""
             }
         }
@@ -47,7 +46,7 @@ pipeline {
                      def jsonSlurper = new JsonSlurperClassic();
                      res = restCall("GET", "${env.BLAZE_CT_TEST_HOOK}", "")
                      rsRes = jsonSlurper.parseText(res)
-                     rsResultAPI = rsRes.data.runs[0].api_test_run_url // [0]["api_test_run_url"];;
+                     rsResultAPI = rsRes.data.runs[0].api_test_run_url
                      println(rsResultAPI)
                  }
                  
@@ -82,7 +81,6 @@ pipeline {
                          sh """docker rmi ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}"""
                          error("functional tests have failed! Rolling back to last successful release..")
                      }
-                     //println(rsRes);
                }
             }
 
