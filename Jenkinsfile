@@ -72,6 +72,7 @@ pipeline {
                          if(rsRes.data.requests[2].assertions[1].actual_value != "${BUILD_NUMBER}"){
                             println("Test executed against old version... probably retrigger... doing nothing for now");
                             println("Actual Build: " + rsRes.data.requests[2].assertions[1].actual_value + " Expected: " + "${BUILD_NUMBER}")
+                            error("functional tests have failed! Rolling back to last successful release..")
                          }else{
                              println("Test executed against latest build!!")
                          }
