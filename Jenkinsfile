@@ -69,12 +69,12 @@ pipeline {
                          println("functional tests have passed!");
                          println("Confirming tests run against correct version");
                          //validate test run against this build...
-                         if(rsRes.data.requests[2].assertions[1].actual_value == ${BUILD_NUMBER}){
+                         if(rsRes.data.requests[2].assertions[1].actual_value != "${BUILD_NUMBER}"){
                             println("Test executed against old version... probably retrigger... doing nothing for now");
                             println("Actual Build: " + rsRes.data.requests[2].assertions[1].actual_value + " Expected: " + "${BUILD_NUMBER}")
+                         }else{
+                             println("Test executed against latest build!!")
                          }
-                         
-                         //ready to continue...
                      }else{
                          //There was error - drop the image and fail the pipeline.. this should cause Weave to revert to
                          //last successful build
@@ -90,13 +90,6 @@ pipeline {
         }
 
     }
-
-def blockThread() {
-    println("Waiting for results...")
-    sleep(30)
-    println("Finished waiting...")
-    return "Finished";
-}
 
 def restCall(String method, String Url, String authToken) {
     def URL url = new URL(Url)
