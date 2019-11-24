@@ -69,9 +69,9 @@ pipeline {
                          println("functional tests have passed!");
                          println("Confirming tests run against correct version");
                          //validate test run against this build...
-                         if(rsRes.data.requests[2].assertions[1].actual_value == "${BUILD_NUMBER}"){
+                         if(rsRes.data.requests[2].assertions[1].actual_value == ${BUILD_NUMBER}){
                             println("Test executed against old version... probably retrigger... doing nothing for now");
-                            println("Actual Build: " + rsRes.data.requests[2].assertions[1].actual_value + "Expected: " + "${BUILD_NUMBER}")
+                            println("Actual Build: " + rsRes.data.requests[2].assertions[1].actual_value + " Expected: " + "${BUILD_NUMBER}")
                          }
                          
                          //ready to continue...
