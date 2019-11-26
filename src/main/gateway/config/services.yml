@@ -10,7 +10,7 @@ usergroup/Test:
   wssProcessingEnabled: false
 usergroup/PragueCounterAPI:
   url: "/api/v1/counter"
-  policy: "usergroup/PragueCounterAPI"
+  policy: "usergroup/CounterAPI"
   httpMethods:
   - "DELETE"
   - "POST"
