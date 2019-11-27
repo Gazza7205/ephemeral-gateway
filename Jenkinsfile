@@ -20,12 +20,12 @@ pipeline {
 
             }
         }
-        stage('Build Image with Docker') {
+        stage('Build Immutable Docker Image') {
             steps {
                 sh """docker build -t ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}  --build-arg BUILD_NUMBER="${NEW_IMAGE_TAG}" ."""
             }
         }
-	   stage('Login Docker, Tag and push docker image to Docker Registry') {
+	   stage('Tag and push docker image to Private Registry') {
             steps {
 		        sh """docker login ${env.NEW_IMAGE_REGISTRY_HOSTNAME} -u ${params.NEW_IMAGE_REGISTRY_USER} --password ${params.NEW_IMAGE_REGISTRY_PASSWORD}
                      docker tag ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG} ${env.NEW_IMAGE_REGISTRY_HOSTNAME}/${env.CURRENT_IMAGE_NAME}:${env.NEW_IMAGE_TAG}
@@ -34,13 +34,13 @@ pipeline {
             }
         }
 
-       stage('Wait for WeaveFlux to apply the update.'){
+       stage('Wait for WeaveFlux to deploy the update.'){
            steps{
                sleep 180
            }
            
        }
-        stage('Blaze CT Functional Test') {
+        stage('Runscope Functional Test') {
             steps {
                  script {
                      def jsonSlurper = new JsonSlurperClassic();
@@ -52,13 +52,13 @@ pipeline {
                  
             }
             }
-        stage('Wait for functional test to complete'){
+        stage('Wait for functional tests to complete'){
             steps {
                sleep(30)
             }
 
         }
-    stage('Validate results'){
+    stage('Validate Results'){
             steps {
                script{
                      def jsonSlurper = new JsonSlurperClassic();
