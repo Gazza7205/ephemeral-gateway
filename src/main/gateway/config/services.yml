@@ -1,6 +1,6 @@
-usergroup/Test:
-  url: "/api/v1/test"
-  policy: "usergroup/Test"
+usergroup/JenkinsBuildNumber:
+  url: "/api/v1/jenkins/buildinfo"
+  policy: "usergroup/JenkinsBuildNumber"
   httpMethods:
   - "DELETE"
   - "POST"
@@ -8,9 +8,9 @@ usergroup/Test:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
-usergroup/PragueCounterAPI:
-  url: "/api/v1/counter"
-  policy: "usergroup/PragueCounterAPI"
+usergroup/Test:
+  url: "/api/v1/test"
+  policy: "usergroup/Test"
   httpMethods:
   - "DELETE"
   - "POST"
@@ -23,26 +23,6 @@ usergroup/ExternalAPICall:
   policy: "usergroup/ExternalAPICall"
   httpMethods:
   - "GET"
-  properties: {}
-  wssProcessingEnabled: false
-usergroup/Jenkins Build Number:
-  url: "/api/v1/jenkins/buildinfo"
-  policy: "usergroup/Jenkins Build Number"
-  httpMethods:
-  - "DELETE"
-  - "POST"
-  - "GET"
-  - "PUT"
-  properties: {}
-  wssProcessingEnabled: false
-usergroup/JenkinsBuildNumber:
-  url: "/api/v1/jenkins/buildinfo"
-  policy: "usergroup/JenkinsBuildNumber"
-  httpMethods:
-  - "DELETE"
-  - "POST"
-  - "GET"
-  - "PUT"
   properties: {}
   wssProcessingEnabled: false
 usergroup/CounterAPI:
