@@ -10,7 +10,7 @@ usergroup/Test:
   wssProcessingEnabled: false
 usergroup/PragueCounterAPI:
   url: "/api/v1/counter"
-  policy: "usergroup/CounterAPI"
+  policy: "usergroup/PragueCounterAPI"
   httpMethods:
   - "DELETE"
   - "POST"
@@ -28,6 +28,16 @@ usergroup/ExternalAPICall:
 usergroup/Jenkins Build Number:
   url: "/api/v1/jenkins/buildinfo"
   policy: "usergroup/Jenkins Build Number"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
+usergroup/JenkinsBuildNumber:
+  url: "/api/v1/jenkins/buildinfo"
+  policy: "usergroup/JenkinsBuildNumber"
   httpMethods:
   - "DELETE"
   - "POST"
