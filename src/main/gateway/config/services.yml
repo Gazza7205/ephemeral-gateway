@@ -45,3 +45,13 @@ usergroup/JenkinsBuildNumber:
   - "PUT"
   properties: {}
   wssProcessingEnabled: false
+usergroup/CounterAPI:
+  url: "/api/v1/counter"
+  policy: "usergroup/CounterAPI"
+  httpMethods:
+  - "DELETE"
+  - "POST"
+  - "GET"
+  - "PUT"
+  properties: {}
+  wssProcessingEnabled: false
