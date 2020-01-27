@@ -9,6 +9,11 @@
             <L7p:HeaderValue stringValue="gzip, deflate"/>
             <L7p:RemoveExisting booleanValue="true"/>
         </L7p:AddHeader>
+        <L7p:RateLimit>
+            <L7p:CounterName stringValue="PRESET(0a93cb7699ed7928)"/>
+            <L7p:MaxRequestsPerSecond stringValue="1"/>
+            <L7p:ShapeRequests booleanValue="true"/>
+        </L7p:RateLimit>
         <L7p:HttpRoutingAssertion>
             <L7p:ProtectedServiceUrl stringValue="https://api.chucknorris.io/jokes/random"/>
             <L7p:RequestHeaderRules httpPassthroughRuleSet="included">

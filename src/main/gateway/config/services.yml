@@ -23,7 +23,10 @@ usergroup/ExternalAPICall:
   policy: "usergroup/ExternalAPICall"
   httpMethods:
   - "GET"
-  properties: {}
+  properties:
+    latencyMetrics.settings: "true|COUNT|100"
+    latencyMetrics.subservices: ""
+    latencyMetrics.captureClientAndFolder: "true|false"
   wssProcessingEnabled: false
 usergroup/CounterAPI:
   url: "/api/v1/counter"
