@@ -19,12 +19,12 @@ usergroup/Test:
   properties: {}
   wssProcessingEnabled: false
 usergroup/ExternalAPICall:
-  url: "/api/v1/norris"
+  url: "/api/v1/norris*"
   policy: "usergroup/ExternalAPICall"
   httpMethods:
   - "GET"
   properties:
-    latencyMetrics.settings: "true|COUNT|100"
+    latencyMetrics.settings: "true|OCCURRENCE|1"
     latencyMetrics.subservices: ""
     latencyMetrics.captureClientAndFolder: "true|false"
   wssProcessingEnabled: false
