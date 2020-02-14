@@ -12,7 +12,7 @@ ENV ENV.PROPERTY.gateway.ENV.buildnumber=$BUILD_NUMBER
 
 #Copy the file that we build during gradle build
 COPY build/gateway/usergroup-1.0.0.gw7 /opt/docker/rc.d/deployment.gw7
-COPY lib/papim-1.0.0.bundle /opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/papim/papim-1.0.0.bundle
+#COPY lib/papim-1.0.0.bundle /opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/papim/papim-1.0.0.bundle
 #COPY lib/cluster-property.bundle /opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/papim/
 
 RUN touch /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
