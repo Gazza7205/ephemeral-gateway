@@ -14,7 +14,6 @@ services:
     
     - /opt/SecureSpan/Gateway/node/default/etc/bootstrap/services/restman
     - ./build/gateway/usergroup-1.0.0.gw7:/opt/docker/rc.d/deployment.gw7
-    - ./lib/papim-1.0.0.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/papim/papim-1.0.0.bundle
     # - ./lib/cluster-property.bundle:/opt/SecureSpan/Gateway/node/default/etc/bootstrap/bundle/papim/cluster-property.bundle
     secrets:
     - source: license
@@ -28,11 +27,6 @@ services:
       #ENV.CONTEXT_VARIABLE_PROPERTY.#OTK Storage Configuration.dbsystem: "cassandra"
       ENV.PROPERTY.gateway.ENV.environment: "test"
       ENV.PROPERTY.gateway.ENV.buildnumber: 1
-      ENV.PROPERTY.gateway.apm.epagent.tcpport: 9090
-      ENV.PROPERTY.gateway.apm.epagent.httpport: 9080
-      ENV.PROPERTY.gateway.apm.epagent.hostname: epagent.epagent.svc.cluster.local
-      ENV.PROPERTY.gateway.apm.epagent.nodename: test-gateway
-      ENV.PROPERTY.gateway.relayGatewayMetrics.enable: "true"
 secrets:
   license:
     file: ./docker/license.xml
